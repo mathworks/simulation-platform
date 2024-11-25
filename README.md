@@ -49,7 +49,7 @@ docker run --mount type=bind,source=/tmp/mwcsim,target=/mount containers.mathwor
 /tmp/mwcsim/install.sh
 ```
 
-This installs the CLI into `/usr/local/bin` and the configuration files to `$HOME/.mwcsim`, which is the default working directory of mwcsim.  You can test the installation by checking the version.
+This installs the CLI into `/usr/local/bin` and the configuration files to `$HOME/.mwcsim`, which is the default working directory of `mwcsim`.  You can test the installation by checking the version.
 
 ```
 mwcsim version
@@ -81,7 +81,7 @@ mwcsim get cluster my-cluster -o yaml | grep loadbalancer
 # STEP 4
 # manually provision domains on your DNS provider
 # the following records are necessary (all 4 point to the same loadbalancer endpoint)
-#   CNAME mydomain.example.com -> Loadbalancer-endpoint
+#   CNAME mydomain.example.com -> loadbalancer-endpoint
 #   CNAME idp.mydomain.example.com -> loadbalancer-endpoint
 #   CNAME oauth.mydomain.example.com -> loadbalancer-endpoint
 #   CNAME registry-access.mydomain.example.com -> loadbalancer-endpoint
@@ -133,7 +133,7 @@ Once the cluster is ready, use the MATLAB client [documentation](https://www.mat
 
 For all commands below, *my-cluster* and *my-region* are placeholders that should be replaced by your desired values.
 
-### Get help on the mwcsim command
+### Get help on the `mwcsim` command
 
 You can get help on the root `mwcsim` command or any sub-commands like below.
 
@@ -223,7 +223,7 @@ mwcsim get cluster my-cluster -o yaml
 The state field signifies in short hand what the cluster state is currently. You can use this as a guide to understand which operations to perform when partially creating or destroying a cluster.  The states are summarized as follows:
 
 ```
-(I)initialized     mwcsim knows about the cluster and tracks it, but no cloud provider resources are provisioned
+(I)nitialized      mwcsim knows about the cluster and tracks it, but no cloud provider resources are provisioned
 (T)erraform        analogous to "terraform apply", cloud resources are provisioned 
 (K)ustomize        similar to step before "kustomize build", where the cluster specific kustomization files are generated
 KubernetesWave(0)  analogous to "kubectl apply", for certain subset of objects that are domain independent
