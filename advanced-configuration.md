@@ -92,7 +92,7 @@ These can be modified as needed to fine-tune the cluster parameters.  Most relev
 
 To create a larger cluster, increase the maximum number of instances in the `generalscale` nodegroup specifically. The `generalscale` nodegroup is designed to host the microservices that scale up by large numbers to accommodate large scale simulations.  The `critical` nodegroup is designed to host the critical services (some are singleton) for the cluster that shouldn't be preempted or moved (such as what happens during a scale down).
 
-**Note: It is recommended to only modify the terraform files while no cluster is created.** Otherwise a state mismatch may occur that'll prevent deletion or management of existing clusters.
+**Note: If you have multiple clusters, it is recommended to only modify the terraform files while no cluster is created.** Otherwise a state mismatch may occur that'll prevent deletion or management of existing clusters. If there is only one cluster, it is generally safe to modify the Terraform files without deleting the cluster. However, updates related to the VPC usually require a full deletion and recreation of the cluster.
 
 ### `mwcsim` corresponding operation
 
@@ -177,7 +177,7 @@ Most of the manifests in this stage can be modified from the base wave 0 locatio
 workdir/manifests/v1/base/deploy0
 ```
 
-**Note: It is recommended to only modify the base manifest files while no cluster is created.** Otherwise a state mismatch may occur that'll prevent deletion or management of existing clusters. If the cluster specific `kustomization.yaml` files are modified, this is not an issue. However, note that the `kustomization.yaml` files will be deleted and regenerated for each `kubectl apply` operation, so the templates should be modified instead.
+**Note: If you have multiple clusters, it is recommended to only modify the base manifest files while no cluster is created.** Otherwise a state mismatch may occur that'll prevent deletion or management of existing clusters. If the cluster specific `kustomization.yaml` files are modified, this is not an issue. However, note that the `kustomization.yaml` files will be deleted and regenerated for each `kubectl apply` operation, so the templates should be modified instead. If you only have one cluster, it is also safe to modify the manifest files and immediately apply them without deleting the cluster.
 
 #### Kubernetes wave 1
 
@@ -196,7 +196,7 @@ Most of the manifests in this stage can be modified from the base wave 1 locatio
 workdir/manifests/v1/base/deploy1
 ```
 
-**Note: It is recommended to only modify the base manifest files while no cluster is created.** Otherwise a state mismatch may occur that'll prevent deletion or management of existing clusters. If the cluster specific `kustomization.yaml` files are modified, this is not an issue. However, note that the `kustomization.yaml` files will be deleted and regenerated for each `kubectl apply` operation, so the templates should be modified instead.
+**Note: If you have multiple clusters, it is recommended to only modify the base manifest files while no cluster is created.** Otherwise a state mismatch may occur that'll prevent deletion or management of existing clusters. If the cluster specific `kustomization.yaml` files are modified, this is not an issue. However, note that the `kustomization.yaml` files will be deleted and regenerated for each `kubectl apply` operation, so the templates should be modified instead. If you only have one cluster, it is also safe to modify the manifest files and immediately apply them without deleting the cluster.
 
 ## Recovering from mistakes and resetting
 
