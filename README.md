@@ -233,7 +233,7 @@ KubernetesWave(1)  analogous to "kubectl apply", for the rest of objects that ar
 (R)eady            cluster is ready for use
 ```
 
-So a cluster with state `I------(-)` signifies that it's only in the initialized state, with no terraform or kubernetes resources applied (hence no cloud resources provisioned at all).
+So a cluster with state `I------(-)` signifies that it's only in the initialized state, with no terraform or kubernetes resources applied (hence no cloud resources provisioned, except for the backend storage of `mwcsim` itself). However, if the `tfapply` operation was attempted but failed, this state can still show while some partial resources are provisioned, as the `(T)erraform` state is only set after successful completion of the `tfapply` operation.
 
 A cluster in the `ITK0D1C(R)` state is fully provisioned and ready to use.
 
