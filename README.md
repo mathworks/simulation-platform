@@ -351,7 +351,7 @@ Instructions on advanced configuration of the underlying Terraform files and Kub
 
 The default simulation cluster created is publicly accessible by authenticated users via encrypted HTTPS. The simulation and model data is stored in a private S3&trade; bucket, where the workers read input data from and write output data to. It is recommended that users modify the Terraform, following the advanced configuration instructions above, to set the VPC to a private [peered network](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) or set a [security group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) such that the access is restricted to your VPN IP ranges.
 
-Additionally, comprehensive security monitoring services such as [AWS GuardDuty&trade;](https://aws.amazon.com/guardduty/) can be setup on your own to monitor the cluster.
+Additionally, comprehensive security monitoring services such as the [AWS GuardDuty&trade;](https://aws.amazon.com/guardduty/) service can be setup on your own to monitor the cluster.
 
 # Support
 

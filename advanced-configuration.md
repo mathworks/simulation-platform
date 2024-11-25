@@ -1,6 +1,6 @@
 # Advanced Configuration
 
-The `mwcsim` CLI is meant to facilitate easy setup and management of simulation clusters, using sensible defaults that work out of the box. However, there are many cases where advanced configuration is necessary to create customized clusters that meet unique requirements. As such, simulation clusters are based on industry standard infrastructure-as-code tooling: Terraform&reg;, Kubernetes&reg; manifests and Kustomize&reg;. These can be modified directly to create the desired cluster.
+The `mwcsim` CLI is meant to facilitate easy setup and management of simulation clusters, using sensible defaults that work out of the box. However, there are many cases where advanced configuration is necessary to create customized clusters that meet unique requirements. As such, simulation clusters are based on industry standard infrastructure-as-code tooling: Terraform&reg; files, Kubernetes&reg; manifests and Kustomize&reg; files. These can be modified directly to create the desired cluster.
 
 Configuration can be broadly categorized into three major pieces:
 - Configuration of the `mwcsim` CLI itself
