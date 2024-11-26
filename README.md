@@ -21,6 +21,14 @@ Currently the simulation cluster is only supported on the **Amazon Web Services 
 - [OpenTofu&reg; software](https://opentofu.org/docs/intro/install/) for terraform management
 - [Docker&reg; engine](https://docs.docker.com/engine/) is used to install the CLI, but not necessary for operation
 
+Before proceeding further, you can test the prerequisites with the following commands. Especially, confirm that you can access your AWS account with the AWS CLI.
+
+```
+aws configure
+tofu version
+docker version
+```
+
 ### AWS security requirements
 
 #### Cluster creation from scratch
@@ -65,70 +73,82 @@ For all commands below, *my-cluster*, *my-username*, *mydomain.example.com*, *lo
 
 This approach requires access to DNS and the ability to assign a domain to the cluster. In the example below, `mydomain.example.com` is the domain where the cluster will be reachable by its clients. The domain needs to be known before-hand, but the records are set midway through the setup after the cluster loadbalancer endpoint is provisioned.
 
+##### STEP 1
+Make sure AWS access is setup.
 ```
-# STEP 1
-# make sure aws access is setup
 aws configure
+```
 
-# STEP 2
-# create stable components of cluster first, that supports MATLAB version R2024bUpdate2 clients
-# note that if you encounter issues, you can safely try rerunning the create command
-# occasionally there are resource provisioning limits or delays that may cause an error
+##### STEP 2
+Create stable components of cluster first, that supports MATLAB version `R2024bUpdate2` clients. Note that if you encounter issues, you can safely try rerunning the `create` command. Occasionally there are resource provisioning limits or delays that may cause an error.
+```
 mwcsim create cluster my-cluster --domain mydomain.example.com -v R2024bUpdate2 -x stableblock
-
-# STEP 3
-# obtain loadbalancer endpoint, hereon referred to as loadbalancer-endpoint
+```
+##### STEP 3
+Obtain loadbalancer endpoint, hereon referred to as *loadbalancer-endpoint*.
+```
 mwcsim get cluster my-cluster -o yaml | grep loadbalancer
+```
 
-# STEP 4
-# manually provision domains on your DNS provider
+##### STEP 4
+Manually provision domains on your DNS provider.
+```
 # the following records are necessary (all 4 point to the same loadbalancer endpoint)
 #   CNAME mydomain.example.com -> loadbalancer-endpoint
 #   CNAME idp.mydomain.example.com -> loadbalancer-endpoint
 #   CNAME oauth.mydomain.example.com -> loadbalancer-endpoint
 #   CNAME registry-access.mydomain.example.com -> loadbalancer-endpoint
-
-# STEP 5
-# create the second half of the cluster components that are dependent on the domain
-# note that if you encounter issues, you can safely try rerunning the create command
-# occasionally there are DNS propagation and HTTPS certification delays that may cause an error
-mwcsim create cluster my-cluster -x dynamicblock
-
-# STEP 6
-# create a first user, this will return an auto-generated password
-# note the username and password
-mwcsim create user my-username -c my-cluster
-
-# STEP 7
-# get the cluster endpoint and note this down
-mwcsim get cluster my-cluster
 ```
 
+##### STEP 5
+Create the second half of the cluster components that are dependent on the domain. Note that if you encounter issues, you can safely try rerunning the `create` command. Occasionally there are DNS propagation and HTTPS certification delays that may cause an error.
+```
+mwcsim create cluster my-cluster -x dynamicblock
+```
+
+##### STEP 6
+Create a first user, this will return an auto-generated password. Note the username and password.
+```
+mwcsim create user my-username -c my-cluster
+```
+
+##### STEP 7
+Get the cluster endpoint and note this down.
+```
+mwcsim get cluster my-cluster
+```
+##### Using the cluster
 Once the cluster is ready, use the MATLAB client [documentation](https://www.mathworks.com/help/slcompiler/large-scale-cloud-simulation-for-simulink-support-package.html?s_tid=CRUX_lftnav) to send large-scale simulation jobs to the cluster, using the cluster endpoint and user credentials from above.
 
 ### Automatically provisioned domain (beta)
 
 `mwcsim` can automatically provision domains as an experimental feature. This feature is only supported on versions `R2024bUpdate3` and later. Automatically provisioned domains don't require DNS access or expertise. **Contact us if you're interested in learning more and using it.**
 
+##### STEP 1
+Make sure AWS access is setup.
 ```
-# STEP 1
-# make sure aws access is setup
 aws configure
+```
 
-# STEP 2
-# create cluster
+##### STEP 2
+Create cluster.
+```
 mwcsim create cluster my-cluster
+```
 
-# STEP 3
-# create a first user, this will return an auto-generated password
-# note the username and password
+##### STEP 3
+Create a first user, this will return an auto-generated password. Note the username and password.
+```
 mwcsim create user my-username -c my-cluster
+```
 
-# STEP 4
-# get the cluster endpoint and note this down
+##### STEP 4
+Get the cluster endpoint and note this down.
+```
 mwcsim get cluster my-cluster
 ```
 
+##### Using the cluster
 Once the cluster is ready, use the MATLAB client [documentation](https://www.mathworks.com/help/slcompiler/large-scale-cloud-simulation-for-simulink-support-package.html?s_tid=CRUX_lftnav) to send large-scale simulation jobs to the cluster, using the cluster endpoint and user credentials from above.
 
 ## Create and destroy simulation clusters
