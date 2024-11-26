@@ -63,6 +63,8 @@ For all commands below, *my-cluster*, *my-username*, *mydomain.example.com*, *lo
 
 ### Manually provisioned domain
 
+This approach requires access to DNS and the ability to assign a domain to the cluster. In the example below, `mydomain.example.com` is the domain where the cluster will be reachable by its clients. The domain needs to be known before-hand, but the records are set midway through the setup after the cluster loadbalancer endpoint is provisioned.
+
 ```
 # STEP 1
 # make sure aws access is setup
