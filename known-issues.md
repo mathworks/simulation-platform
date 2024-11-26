@@ -76,6 +76,10 @@ mwcsim delete cluster my-cluster -x kubeapply1
 mwcsim create cluster my-cluster
 ```
 
+### Timed out trying to reach CDDS
+
+You'll get this error if you try to use the domain auto-provisioning feature. Please contact us if you're interested in this beta feature.
+
 ## On MATLAB client connecting to the cluster
 
 ### 503 error while running addCluster
