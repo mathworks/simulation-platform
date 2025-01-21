@@ -46,14 +46,14 @@ A simulation cluster can be created with reduced permission requirements using e
 The easiest method is to pull the `csim-mwcsim` container, which brings all the configuration files along with the CLI.
 
 ```
-docker pull containers.mathworks.com/simulation-platform/csim-mwcsim:v0.5.27
+docker pull containers.mathworks.com/simulation-platform/csim-mwcsim:v0.5.32
 ```
 
 Install the CLI with the following commands.  Note the mounted directory should remain `/tmp/mwcsim` for a smooth installation.  The `install.sh` command may prompt for `sudo` access.
 
 ```
 mkdir -p /tmp/mwcsim
-docker run --mount type=bind,source=/tmp/mwcsim,target=/mount containers.mathworks.com/simulation-platform/csim-mwcsim:v0.5.27
+docker run --mount type=bind,source=/tmp/mwcsim,target=/mount containers.mathworks.com/simulation-platform/csim-mwcsim:v0.5.32
 /tmp/mwcsim/install.sh
 ```
 
